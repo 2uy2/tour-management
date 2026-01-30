@@ -8,8 +8,13 @@ const port: number | string = process.env.PORT;
 
 
 
+//setting cho pug
+app.set('views', `${__dirname}/views`);
+app.set('view engine', 'pug');
+
+
 app.get("/tours",(req:Request,res:Response)=>{
-    res.send("danh sách tour");
+    res.render("client/pages/tours/index");
 })
 
 app.listen(port ,()=>{
