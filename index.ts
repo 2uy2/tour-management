@@ -7,6 +7,9 @@ dotenv.config();
 const app:Express = express();
 const port: number | string = process.env.PORT;
 
+//tạo folder tĩnh
+app.use(express.static("public"));
+
 //setting cho pug
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'pug');
