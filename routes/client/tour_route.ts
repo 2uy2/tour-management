@@ -3,7 +3,7 @@ import * as controller from "../../controller/client/tour_controller";
 const router :Router= Router();
 
 
-router.get("/",controller.index);
+router.get("/:slugCategory",controller.index);
 
 
 
