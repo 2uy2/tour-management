@@ -1,0 +1,10 @@
+import {  Router } from "express";
+import * as controller from "../../controller/client/cart_controller"
+const router :Router= Router();
+
+
+router.get("/",controller.index);
+
+
+
+export const cartRoutes:Router=router;
