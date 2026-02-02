@@ -105,7 +105,7 @@ const updateQuantityItemInCart = () => {
           const cart = JSON.parse(localStorage.getItem("cart"));
           const itemUpdate = cart.find(item => item.tourId == tourId);
           if(itemUpdate) {
-            itemUpdate.quantity = quantity;
+            itemUpdate.quantity = quantity;//tham chiếu đến cart, nên cart thay đổi theo
             localStorage.setItem("cart", JSON.stringify(cart));
             window.location.reload();
           }
@@ -163,4 +163,34 @@ if (tableCart) {
     })
 }
 // Hết Vẽ tour vào giỏ hàng
+// Đặt tour
+const formOrder = document.querySelector("[form-order]");
+if(formOrder) {
+  formOrder.addEventListener("submit", (event) => {
+    event.preventDefault();
 
+    const cart = JSON.parse(localStorage.getItem("cart")); //đổi thành dạng array
+
+    const dataFinal = {
+      info: {
+        fullName: formOrder.fullName.value,
+        phone: formOrder.phone.value,
+        note: formOrder.note.value,
+      },
+      cart: cart
+    };
+
+    fetch("/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dataFinal)// chuyển về dạng json
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+  })
+}
+// Hết Đặt tour
