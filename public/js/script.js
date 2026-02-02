@@ -78,7 +78,7 @@ if (formAddToCart) {
 // Xóa sản phẩm trong giỏ hàng
 const deleteItemInCart = () => {
   const listButtonDelete = document.querySelectorAll("[btn-delete]");
-  if(listButtonDelete.length > 0) {
+  if (listButtonDelete.length > 0) {
     listButtonDelete.forEach(button => {
       button.addEventListener("click", () => {
         const tourId = button.getAttribute("btn-delete");
@@ -95,17 +95,17 @@ const deleteItemInCart = () => {
 // Cập nhật số lượng sản phẩm trong giỏ hàng
 const updateQuantityItemInCart = () => {
   const listInputQuantity = document.querySelectorAll("input[name='quantity']");
-  if(listInputQuantity.length > 0) {
+  if (listInputQuantity.length > 0) {
     listInputQuantity.forEach(input => {
       input.addEventListener("change", () => {
         const tourId = parseInt(input.getAttribute("item-id"));
         const quantity = parseInt(input.value);
 
-        if(tourId && quantity > 0) {
+        if (tourId && quantity > 0) {
           const cart = JSON.parse(localStorage.getItem("cart"));
           const itemUpdate = cart.find(item => item.tourId == tourId);
-          if(itemUpdate) {
-            itemUpdate.quantity = quantity;//tham chiếu đến cart, nên cart thay đổi theo
+          if (itemUpdate) {
+            itemUpdate.quantity = quantity; //tham chiếu đến cart, nên cart thay đổi theo
             localStorage.setItem("cart", JSON.stringify(cart));
             window.location.reload();
           }
@@ -165,28 +165,25 @@ if (tableCart) {
 // Hết Vẽ tour vào giỏ hàng
 // Đặt tour
 const formOrder = document.querySelector("[form-order]");
-if(formOrder) {
+if (formOrder) {
   formOrder.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    const cart = JSON.parse(localStorage.getItem("cart")); //đổi thành dạng array
-
     const dataFinal = {
       info: {
-        fullName: formOrder.fullName.value,
-        phone: formOrder.phone.value,
-        note: formOrder.note.value,
+        fullName: event.target.fullName.value,
+        phone: event.target.phone.value,
+        note: event.target.note.value
       },
-      cart: cart
+      cart: JSON.parse(localStorage.getItem("cart"))
     };
 
     fetch("/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(dataFinal)// chuyển về dạng json
-    })
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataFinal)
+      })
       .then(res => res.json())
       .then(data => {
         console.log(data);
