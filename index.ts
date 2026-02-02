@@ -1,12 +1,18 @@
 import express , {Express} from "express";
 import dotenv from "dotenv"
 import moment from "moment";
+import bodyParser from "body-parser";
 import clientRoutes from "./routes/client/index_route";
+
 
 dotenv.config();
 
 const app:Express = express();
 const port: number | string = process.env.PORT;
+
+// parse application/json
+// tự động JSON.parse() gán vào req.body
+app.use(bodyParser.json()); 
 
 //tạo folder tĩnh
 app.use(express.static("public"));
