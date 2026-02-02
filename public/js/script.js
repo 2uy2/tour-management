@@ -75,6 +75,23 @@ if (formAddToCart) {
 }
 // end cart
 
+// Xóa sản phẩm trong giỏ hàng
+const deleteItemInCart = () => {
+  const listButtonDelete = document.querySelectorAll("[btn-delete]");
+  if(listButtonDelete.length > 0) {
+    listButtonDelete.forEach(button => {
+      button.addEventListener("click", () => {
+        const tourId = button.getAttribute("btn-delete");
+        const cart = JSON.parse(localStorage.getItem("cart"));
+        const newCart = cart.filter(item => item.tourId != tourId); //tạo mảng mới thoả điều kiện item.tourId != tourId
+        localStorage.setItem("cart", JSON.stringify(newCart));
+        window.location.reload();
+      })
+    })
+  }
+}
+// Hết Xóa sản phẩm trong giỏ hàng
+
 // vẽ tour vào giỏ hàng
 
 const tableCart = document.querySelector("[table-cart]");
@@ -117,6 +134,8 @@ if (tableCart) {
 
       const totalPrice = document.querySelector("[total-price]");
       totalPrice.innerHTML = data.total.toLocaleString(); //toLocaleString() là hàm để có thể dấu chấm ở số cho dễ nhìn
+      deleteItemInCart();
     })
 }
 // Hết Vẽ tour vào giỏ hàng
+
