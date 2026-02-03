@@ -63,3 +63,10 @@ export const index = async (req: Request, res: Response) => {
         orderCode: code
     });
 };
+
+//get /order/success?orderCode=${data.orderCode}
+export const success = async (req: Request, res: Response) => {
+  res.render("client/pages/order/success", {
+    pageTitle: "Đặt hàng thành công"
+  })
+}
