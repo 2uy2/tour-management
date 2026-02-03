@@ -15,6 +15,8 @@ const port: number | string = process.env.PORT;
 // parse application/json
 // tự động JSON.parse() gán vào req.body
 app.use(bodyParser.json()); 
+app.use(express.json()); // cho JSON
+app.use(express.urlencoded({ extended: true })); // cho form submit
 
 //tạo folder tĩnh
 app.use(express.static("public"));

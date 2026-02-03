@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize"; // DataTypes import từ thư viện sequelize 
 import sequelize from "../config.ts/database";
+import slugify from "slugify";
 
 //tham số thứ nhất là tên model muôn đặt,tham số thứ hai là định nghĩa danh sách các biến và kiểu dữ liệu biến đó,tham số thứ 3 là tên bảng
 const Tour = sequelize.define("Tour",{
@@ -58,6 +59,13 @@ const Tour = sequelize.define("Tour",{
 },{
     tableName:"tours",
     timestamps:true // tự động quản lý createAT và updateAt
-})
+});
+//tạo slug trước khi lưu vào database
+Tour.beforeCreate((tour) => {
+  tour["slug"] = slugify(`${tour["title"]}-${Date.now()}`, {
+    lower: true,
+    strict: true
+  });
+});
 
 export default Tour;
