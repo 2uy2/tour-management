@@ -1,3 +1,4 @@
+
 // slider tour detail
 var imagesThumb = new Swiper(".imagesThumb", {
   spaceBetween: 10,
@@ -194,3 +195,4 @@ if (formOrder) {
   })
 }
 // Hết Đặt tour
+

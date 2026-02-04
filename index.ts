@@ -5,12 +5,15 @@ import bodyParser from "body-parser";
 import clientRoutes from "./routes/client/index_route";
 import adminRoutes from "./routes/admin/index_routes";
 import { systemConfig } from "./config.ts/config";
+import path from "path";
 
 
 dotenv.config();
 
 const app:Express = express();
 const port: number | string = process.env.PORT;
+
+app.use(express.static(`${__dirname}/public`));
 
 // parse application/json
 // tự động JSON.parse() gán vào req.body

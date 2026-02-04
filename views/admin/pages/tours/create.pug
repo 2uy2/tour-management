@@ -37,7 +37,9 @@ block main
                 name="images"
                 accept="image/*"
                 multiple
-        )
+            )
+            
+            div( class="custom-file-container" data-upload-id="upload-image")
         div(class="form-group")
             label(for="price") Giá
             input(
@@ -77,6 +79,22 @@ block main
                 name="timeStart"
                 value="0"
                 min="0"
+            )
+        div(class="form-group")
+        label(for="information") Thông tin tour
+        textarea(
+          class="form-control"
+          id="information"
+          name="information"
+          textarea-mce
+        )
+        div(class="form-group")
+            label(for="schedule") Lịch trình tour
+            textarea(
+                class="form-control"
+                id="schedule"
+                name="schedule"
+                textarea-mce
             )
         div(class="form-group")
             label(for="position") Vị trí
